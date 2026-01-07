@@ -28,7 +28,7 @@ def get_user(user_id: str) -> UserResponse | None:
 def update_user(user_id: str, user_data: UserUpdate):
     user= get_user(user_id)
     if not user:
-        return user
+        return None
     
     if user_data.email is not None:
         user.email= user_data.email

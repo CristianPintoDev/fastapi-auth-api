@@ -1,12 +1,15 @@
 from app.users.schema import UserCreate, UserUpdate
 from sqlalchemy.orm import Session
 from app.users.model import User
+from app.core.security import hash_password, verify_password
+
 
 
 def create_user(db: Session, user: UserCreate):
     db_user = User(
         email=user.email,
         name=user.name,
+        password_hash=hash_password(user.password),
         is_active=True
     )
     db.add(db_user)
@@ -14,7 +17,14 @@ def create_user(db: Session, user: UserCreate):
     db.refresh(db_user)
     return db_user
 
-
+def autenticate_user(db: Session, email: str, password: str):
+    user = db.query(User).filter(User.email == email).first()
+    if not user:
+        return None
+    if not verify_password(password, user.password_hash):
+        return None
+    return user
+    
 
 def list_users(db: Session):
     return db.query(User).all()

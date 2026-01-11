@@ -6,10 +6,16 @@ from app.core.config import settings
 class Base(DeclarativeBase):
     pass
 
-engine = create_engine(
-    settings.DATABASE_URL, 
-    connect_args={"check_same_thread": False}
-)
+
+DATABASE_URL = settings.DATABASE_URL
+
+if DATABASE_URL.startswith("sqlite"):
+    engine = create_engine(
+        DATABASE_URL,
+        connect_args={"check_same_thread": False}
+    )
+else:
+    engine = create_engine(DATABASE_URL)
 
 
 SessionLocal = sessionmaker(
@@ -18,7 +24,8 @@ SessionLocal = sessionmaker(
     bind=engine
 )
 
-def get_db() :
+
+def get_db():
     db = SessionLocal()
     try:
         yield db

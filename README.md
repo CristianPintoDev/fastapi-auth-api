@@ -6,7 +6,7 @@ REST API built with FastAPI featuring JWT authentication, user management and cl
 
 ## 🔗 Live Demo
 
-👉 https://fastapi-auth-api.onrender.com/docs
+👉 https://fastapi-auth-api-gglh.onrender.com/docs
 
 ---
 

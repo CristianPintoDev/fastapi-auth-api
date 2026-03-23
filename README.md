@@ -1,35 +1,34 @@
-# FastAPI Backend Learning 🚀
+# FastAPI Auth API 🚀
 
-Proyecto para aprender, poner en practica y recordar como construir un backend con **FastAPI**, aplicando buenas prácticas de arquitectura, autenticación y seguridad.
-
----
-## 🔗 **API en producción (Render):**  
-  👉 [Desplegado en RENDER](https://fastapi-backend-learning.onrender.com/docs)
-
-## 🎯 Objetivo del proyecto
-
-El objetivo de este proyecto es servir como **base sólida de aprendizaje** para:
-
-* Construcción de APIs REST con FastAPI
-* Separación por capas (router, service, schema, model)
-* Autenticación con JWT (login y protección de rutas)
-* Manejo seguro de contraseñas con `passlib` y `bcrypt`
-* Uso de dependencias (`Depends`) para seguridad
-* Configuración con `pydantic-settings`
-
-Este proyecto **no busca ser un sistema final**, sino una **base profesional y reutilizable**.
+REST API built with FastAPI featuring JWT authentication, user management and clean architecture.
 
 ---
 
-## 🧱 Estructura del proyecto
+## 🔗 Live Demo
 
-```
+👉 https://fastapi-auth-api.onrender.com/docs
+
+---
+
+## 🚀 Features
+
+* JWT authentication (login + protected routes)
+* User management (CRUD)
+* Password hashing with bcrypt
+* Layered architecture (router, service, schema, model)
+* Dependency-based security with FastAPI
+
+---
+
+## 🧱 Project Structure
+
+```id="r3q9zp"
 app/
 ├── main.py
 ├── core/
-│   ├── config.py        # Settings y variables de entorno
-│   ├── database.py      # Conexión a la base de datos
-│   └── security.py      # Hash de contraseñas y JWT
+│   ├── config.py
+│   ├── database.py
+│   └── security.py
 ├── users/
 │   ├── model.py
 │   ├── schema.py
@@ -39,76 +38,64 @@ app/
 │   ├── schema.py
 │   ├── service.py
 │   ├── router.py
-|   └── dependencies.py
-...
+│   └── dependencies.py
+```
 
 ---
 
-## 🔐 Autenticación
+## 🔐 Authentication
 
-* Login mediante `/auth/login`
-* Generación de **JWT Bearer Token**
-* Protección de endpoints usando:
+* Login: `/auth/login`
+* Token: JWT Bearer
+* Protected endpoints require:
 
-```python
-current_user = Depends(get_current_user)
-```
-
-El token se envía **exclusivamente por header**:
-
-```
+```id="j1zqop"
 Authorization: Bearer <token>
 ```
 
-Totalmente compatible con Swagger UI.
+---
+
+## 🧪 Local Development
+
+```bash id="qf1x5p"
+pip install -r requirements.txt
+uvicorn app.main:app --reload
+```
+
+Open in your browser:
+
+```id="4ttd6x"
+http://127.0.0.1:8000/docs
+```
 
 ---
 
-## 🧪 Uso en Swagger
+## 🛠️ Tech Stack
 
-1. Ejecutar el proyecto
-2. Ir a `/docs`
-3. Hacer login en `/auth/login`
-4. Copiar el `access_token`
-5. Presionar **Authorize**
-6. Escribir:
-
-```
-Bearer <access_token>
-```
-
-7. Probar endpoints protegidos
-
----
-
-## 🛠️ Tecnologías usadas
-
-* Python 3.10+
+* Python
 * FastAPI
 * SQLAlchemy
-* Pydantic v2
-* passlib + bcrypt
+* Pydantic
+* Passlib (bcrypt)
 * JWT (python-jose)
-* Uvicorn
 
 ---
 
-## ✅ Estado del proyecto
+## 📌 Status
 
-✔ Arquitectura limpia
-✔ Autenticación funcional
-✔ Errores críticos resueltos
-✔ Buenas prácticas aplicadas
+Core backend functionality implemented:
 
-📌 Proyecto **finalizado como base de aprendizaje**.
-
----
-
-## 📄 Licencia
-
-Proyecto con fines educativos.
-Libre de usar, modificar y extender.
+* Authentication ✔
+* User management ✔
+* Clean architecture ✔
 
 ---
 
-✍️ Autor: Cristian Pinto
+## 👨‍💻 Author
+
+Cristian Pinto
+
+
+## License
+
+This project is licensed under the MIT License.

@@ -17,7 +17,7 @@ def create_user(db: Session, user: UserCreate):
     db.refresh(db_user)
     return db_user
 
-def autenticate_user(db: Session, email: str, password: str):
+def authenticate_user(db: Session, email: str, password: str):
     user = db.query(User).filter(User.email == email).first()
     if not user:
         return None
@@ -47,6 +47,9 @@ def update_user(db: Session, user_id: str, user_data: UserUpdate):
     
     if user_data.is_active is not None:
         user.is_active= user_data.is_active
+    
+    if user_data.password is not None:
+        user.password_hash = hash_password(user_data.password)
 
     db.commit()
     db.refresh(user)

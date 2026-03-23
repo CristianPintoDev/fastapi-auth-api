@@ -20,8 +20,13 @@ def create_user_endpoint(
 
 
 @router.get("/", response_model=list[UserResponse])
-def get_users(db: Session = Depends(get_db)):
+def get_users(db: Session = Depends(get_db), current_user: User = Depends(get_current_user)):
     return list_users(db)
+
+@router.get("/me")
+def read_me(current_user: User = Depends(get_current_user)):
+    return current_user
+
 
 @router.get("/{user_id}", response_model=UserResponse)
 def get_user_by_id(
@@ -56,6 +61,3 @@ def delete_user_endpoint(
         raise HTTPException(status_code=404, detail="Usuario no encontrado")
     return user
     
-@router.get("/me")
-def read_me(current_user: User = Depends(get_current_user)):
-    return current_user

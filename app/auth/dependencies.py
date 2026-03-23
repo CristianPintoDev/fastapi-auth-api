@@ -29,6 +29,10 @@ def get_current_user(
         )
         user_id: str | None = payload.get("sub")
 
+        print("TOKEN:", token)
+        print("PAYLOAD:", payload)
+        print("USER_ID:", user_id)
+
         if user_id is None:
             raise credentials_exception
 
@@ -37,7 +41,12 @@ def get_current_user(
 
     user = db.query(User).filter(User.id == user_id).first()
 
+    print("USER FOUND:", user)
+
     if user is None:
+        raise credentials_exception
+    
+    if not user.is_active:
         raise credentials_exception
 
     return user

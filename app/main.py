@@ -6,7 +6,7 @@ from app.users import model
 
 
 
-app = FastAPI(title="FastAPI Backend Learning")
+app = FastAPI(title="FastAPI auth API")
 
 app.include_router(user_router)
 app.include_router(auth_router)
